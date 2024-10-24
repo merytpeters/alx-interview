@@ -4,10 +4,11 @@ This module provides functions to parse log data and compute statistics.
 """
 import sys
 import re
-import signal
 
 
 class LogParser:
+    """Class Log Parser"""
+
     def __init__(self):
         """Class initialization"""
         self.total_file_size = 0
@@ -32,17 +33,18 @@ class LogParser:
         """Print statistics."""
         print("File size:", self.total_file_size)
         for status_code in sorted(self.status_code_count.keys()):
-            print("{}: {}".format(status_code,
-                                  self.status_code_count[status_code]))
+            if self.status_code_count[status_code] > 0:
+                print("{}: {}".format(status_code,
+                                      self.status_code_count[status_code]))
 
-    def signal_handler(self, sig, frame):
-        """Handle signal interruption."""
+    """def signal_handler(self, sig, frame):
+        Handle signal interruption
         self.print_statistics()
-        sys.exit(0)
+        sys.exit(0)"""
 
     def process_logs(self):
         """Process log lines from standard input."""
-        signal.signal(signal.SIGINT, self.signal_handler)
+        """signal.signal(signal.SIGINT, self.signal_handler)"""
 
         try:
             line_count = 0
@@ -59,9 +61,10 @@ class LogParser:
                 # Print statistics after every 10 lines
                 if line_count % 10 == 0:
                     self.print_statistics()
+            self.print_statistics()
 
-        except (KeyboardInterrupt, BrokenPipeError):
-            self.signal_handler(signal.SIGINT, None)
+        except Exception:
+            self.print_statistics()
 
 
 def main():
