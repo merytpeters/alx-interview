@@ -11,7 +11,8 @@ class LogParser:
     def __init__(self):
         """Class initialization"""
         self.total_file_size = 0
-        self.status_code_count = {}
+        self.status_code_count = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0,
+                                  404: 0, 405: 0, 500: 0}
 
     def parse_line(self, line):
         """Parse a line of log data."""
@@ -44,7 +45,9 @@ class LogParser:
         signal.signal(signal.SIGINT, self.signal_handler)
 
         try:
-            for line_count, line in enumerate(sys.stdin, start=1):
+            line_count = 0
+            for line in sys.stdin:
+                line_count += 1
                 line = line.strip()
                 parsed_data = self.parse_line(line)
                 if parsed_data:
