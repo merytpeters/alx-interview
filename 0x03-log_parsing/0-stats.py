@@ -16,7 +16,7 @@ class LogParser:
 
     def parse_line(self, line):
         """Parse a line of log data."""
-        pattern = (r'^(\d+\.\d+\.\d+\.\d+) - \[(.*?)\] "GET /projects/260 '
+        pattern = (r'(\S+) - \[(.*?)\] "GET /projects/260 '
                    r'HTTP/1\.1" (\d+) (\d+)$')
 
         match = re.match(pattern, line)
@@ -56,7 +56,7 @@ class LogParser:
                     self.status_code_count[status_code] = self\
                         .status_code_count.get(status_code, 0) + 1
 
-                # Print statistics after every 10 lines (or adjust as needed)
+                # Print statistics after every 10 lines
                 if line_count % 10 == 0:
                     self.print_statistics()
 
