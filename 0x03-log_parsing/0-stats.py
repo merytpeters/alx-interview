@@ -24,8 +24,11 @@ class LogParser:
         if match:
             ip_address = match.group(1)
             date = match.group(2)
-            status_code = int(match.group(3))
-            file_size = int(match.group(4))
+            try:
+                status_code = int(match.group(3))
+                file_size = int(match.group(4))
+            except ValueError:
+                return None
             return ip_address, date, status_code, file_size
         return None
 
