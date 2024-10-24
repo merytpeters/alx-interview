@@ -37,15 +37,8 @@ class LogParser:
                 print("{}: {}".format(status_code,
                                       self.status_code_count[status_code]))
 
-    """def signal_handler(self, sig, frame):
-        Handle signal interruption
-        self.print_statistics()
-        sys.exit(0)"""
-
     def process_logs(self):
         """Process log lines from standard input."""
-        """signal.signal(signal.SIGINT, self.signal_handler)"""
-
         try:
             line_count = 0
             for line in sys.stdin:
@@ -65,6 +58,7 @@ class LogParser:
 
         except Exception:
             self.print_statistics()
+            sys.exit(0)
 
 
 def main():
