@@ -31,7 +31,8 @@ class LogParser:
         """Print statistics."""
         print("File size:", self.total_file_size)
         for status_code in sorted(self.status_code_count.keys()):
-            print("{}: {}".format(status_code, self.status_code_count[status_code]))
+            print("{}: {}".format(status_code,
+                                  self.status_code_count[status_code]))
 
     def signal_handler(self, sig, frame):
         """Handle signal interruption."""
@@ -49,7 +50,8 @@ class LogParser:
                 if parsed_data:
                     _, _, status_code, file_size = parsed_data
                     self.total_file_size += file_size
-                    self.status_code_count[status_code] = self.status_code_count.get(status_code, 0) + 1
+                    self.status_code_count[status_code] = self\
+                        .status_code_count.get(status_code, 0) + 1
 
                 # Print statistics after every 10 lines (or adjust as needed)
                 if line_count % 10 == 0:
