@@ -17,7 +17,7 @@ class LogParser:
 
     def parse_line(self, line):
         """Parse a line of log data."""
-        pattern = (r'(\S+) - \[(.*?)\] "GET /projects/260 '
+        pattern = (r'^(\d+\.\d+\.\d+\.\d+) - \[(.*?)\] "GET /projects/260 '
                    r'HTTP/1\.1" (\d+) (\d+)$')
 
         match = re.match(pattern, line)
