@@ -58,7 +58,7 @@ class LogParser:
                     self.print_statistics()
 
         except (KeyboardInterrupt, BrokenPipeError):
-            self.signal_handler(None, None)
+            self.signal_handler(signal.SIGINT, None)
 
 
 def main():
