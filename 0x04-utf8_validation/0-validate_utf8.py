@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Valid UTF-8 Encoding"""
 
 
@@ -19,7 +19,7 @@ def validUTF8(data):
                 num_bytes = 2
             elif (byte >> 3) == 0b11110:
                 num_bytes = 3
-            elif (byte >> 7):
+            elif (byte >> 7) == 1:
                 return False
             else:
                 if not (byte & mask1 and not (byte & mask2)):
