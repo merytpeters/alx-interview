@@ -20,8 +20,10 @@ def is_valid(board, row, col):
     return True
 
 
-def solve_nqueens(n, row=0, board=[]):
+def solve_nqueens(n, row=0, board=None):
     """Recursive backtracking to find all solutions to the N queens problem."""
+    if board is None:
+        board = []
     if row == n:
         print([[i, board[i]] for i in range(n)])
         return
