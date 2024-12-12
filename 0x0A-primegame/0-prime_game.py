@@ -5,7 +5,7 @@
 def isprime(n):
     """Checks for prime numbers using sieve of eratosthene
     and returns the prime number and all its multiples"""
-    prime = [True] * (n + 1)
+    prime = [True for _ in range(n + 1)]
     p = 2
     while (p * p <= n):
         if prime[p]:
@@ -17,38 +17,17 @@ def isprime(n):
 
 
 def isWinner(x, nums):
-    """Function that returns the winner in a prime game where players
-    alternate picking prime numbers and their multiple"""
-    precomputed_primes = isprime(10000)
+    """Function that returns the winner in a prime game"""
     maria = 0
     ben = 0
 
+    if nums is None:
+        return None
+
     while x > 0:
         for n in nums:
-            # Simulate game for each round
-            prime_nums = [p for p in precomputed_primes if p <= n]
-            # A set of primes for fast lookup
-            prime_set = set(prime_nums)
-            turns = 0
-
-            while prime_set:
-                # Maria's turn, as first player
-                # Maria picks the smallest prime
-                prime = min(prime_set)
-                # Remove prime and multiples
-                prime_set.difference_update(range(prime, n + 1, prime))
-                turns += 1
-
-                if not prime_set:
-                    break
-
-                # Ben picks the smallest prime
-                prime = min(prime_set)
-                prime_set.difference_update(range(prime, n + 1, prime))
-                turns += 1
-
-            # Maria wins if turns is odd
-            if turns % 2 == 1:
+            # if the number of primes is odd, Maria wins, she picks first;
+            if len(isprime(n)) % 2 == 1:
                 maria += 1
             else:
                 ben += 1
