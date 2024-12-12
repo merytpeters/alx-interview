@@ -23,11 +23,27 @@ def isWinner(x, nums):
 
     while x > 0:
         for n in nums:
+            # Simulate game for each round
             prime_nums = isprime(n)
-            prime_count = len(prime_nums)
+            # A set of primes for fast lookup
+            prime_set = set(prime_nums)
+            turns = 0
 
-            # if the number of primes is odd, Maria wins, she picks first;
-            if prime_count % 2 == 1:
+            while prime_set:
+                # Maria's turn, as first player
+                if turns % 2 == 0:
+                    # Maria picks the smallest prime
+                    prime = min(prime_set)
+                    # Remove prime multiples
+                    prime_set -= set(range(prime, n + 1, prime))
+                else:
+                    # Ben picks the smallest prime
+                    prime = min(prime_set)
+                    prime_set -= set(range(prime, n + 1, prime))
+                turns += 1
+
+            # Maria wins if turns is odd
+            if turns % 2 == 1:
                 maria += 1
             else:
                 ben += 1
