@@ -31,15 +31,18 @@ def isWinner(x, nums):
 
             while prime_set:
                 # Maria's turn, as first player
-                if turns % 2 == 0:
-                    # Maria picks the smallest prime
-                    prime = min(prime_set)
-                    # Remove prime multiples
-                    prime_set -= set(range(prime, n + 1, prime))
-                else:
-                    # Ben picks the smallest prime
-                    prime = min(prime_set)
-                    prime_set -= set(range(prime, n + 1, prime))
+                # Maria picks the smallest prime
+                prime = min(prime_set)
+                # Remove prime multiples
+                prime_set -= set(range(prime, n + 1, prime))
+                turns += 1
+
+                if not prime_set:
+                    break
+
+                # Ben picks the smallest prime
+                prime = min(prime_set)
+                prime_set -= set(range(prime, n + 1, prime))
                 turns += 1
 
             # Maria wins if turns is odd
