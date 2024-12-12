@@ -17,7 +17,8 @@ def isprime(n):
 
 
 def isWinner(x, nums):
-    """Function that returns the winner in a prime game"""
+    """Function that returns the winner in a prime game where players
+    alternate picking prime numbers and their multiple"""
     maria = 0
     ben = 0
 
@@ -33,8 +34,8 @@ def isWinner(x, nums):
                 # Maria's turn, as first player
                 # Maria picks the smallest prime
                 prime = min(prime_set)
-                # Remove prime multiples
-                prime_set -= set(range(prime, n + 1, prime))
+                # Remove prime and multiples
+                prime_set.difference_update(range(prime, n + 1, prime))
                 turns += 1
 
                 if not prime_set:
@@ -42,7 +43,7 @@ def isWinner(x, nums):
 
                 # Ben picks the smallest prime
                 prime = min(prime_set)
-                prime_set -= set(range(prime, n + 1, prime))
+                prime_set.difference_update(range(prime, n + 1, prime))
                 turns += 1
 
             # Maria wins if turns is odd
